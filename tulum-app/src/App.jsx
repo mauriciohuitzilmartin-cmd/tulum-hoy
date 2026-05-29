@@ -8,7 +8,7 @@ function App() {
   const [count, setCount] = useState(0)
 
   // 🟢 NUEVO: imagen fullscreen
-  const [selectedImage, setSelectedImage] = useState(null)
+ onClick={() => setSelectedImage(heroImg)}
 
   return (
     <>
@@ -92,34 +92,31 @@ function App() {
       <section id="spacer"></section>
 
       {/* 🟢 FULLSCREEN IMAGE MODAL */}
-      {selectedImage && (
-        <div
-          onClick={() => setSelectedImage(null)}
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-            background: "rgba(0,0,0,0.9)",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: 9999,
-            cursor: "pointer"
-          }}
-        >
-          <img
-            src={selectedImage}
-            style={{
-              maxWidth: "95%",
-              maxHeight: "95%",
-              borderRadius: 10,
-              boxShadow: "0 10px 40px rgba(0,0,0,0.6)"
-            }}
-          />
-        </div>
-      )}
+{selectedImage && (
+  <div
+    onClick={() => setSelectedImage(null)}
+    style={{
+      position: "fixed",
+      inset: 0,
+      backgroundColor: "rgba(0,0,0,0.95)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: 999999,
+    }}
+  >
+    <img
+      src={selectedImage}
+      alt="fullscreen"
+      style={{
+        maxWidth: "95vw",
+        maxHeight: "95vh",
+        borderRadius: 12,
+        boxShadow: "0 10px 40px rgba(0,0,0,0.8)"
+      }}
+    />
+  </div>
+)}
     </>
   )
 }

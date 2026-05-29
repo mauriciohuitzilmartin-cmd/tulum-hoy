@@ -7,20 +7,36 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0)
 
+  // 🟢 NUEVO: imagen fullscreen
+  const [selectedImage, setSelectedImage] = useState(null)
+
   return (
     <>
       <section id="center">
         <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
+
+          {/* 🟢 CLICK EN IMAGEN */}
+          <img
+            src={heroImg}
+            className="base"
+            width="170"
+            height="179"
+            alt=""
+            style={{ cursor: "pointer" }}
+            onClick={() => setSelectedImage(heroImg)}
+          />
+
           <img src={reactLogo} className="framework" alt="React logo" />
           <img src={viteLogo} className="vite" alt="Vite logo" />
         </div>
+
         <div>
           <h1>Get started</h1>
           <p>
             Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
           </p>
         </div>
+
         <button
           type="button"
           className="counter"
@@ -54,6 +70,7 @@ function App() {
             </li>
           </ul>
         </div>
+
         <div id="social">
           <svg className="icon" role="presentation" aria-hidden="true">
             <use href="/icons.svg#social-icon"></use>
@@ -62,52 +79,10 @@ function App() {
           <p>Join the Vite community</p>
           <ul>
             <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
+              <a href="https://github.com/vitejs/vite" target="_blank">GitHub</a>
             </li>
             <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
+              <a href="https://chat.vite.dev/" target="_blank">Discord</a>
             </li>
           </ul>
         </div>
@@ -115,6 +90,36 @@ function App() {
 
       <div className="ticks"></div>
       <section id="spacer"></section>
+
+      {/* 🟢 FULLSCREEN IMAGE MODAL */}
+      {selectedImage && (
+        <div
+          onClick={() => setSelectedImage(null)}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            background: "rgba(0,0,0,0.9)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 9999,
+            cursor: "pointer"
+          }}
+        >
+          <img
+            src={selectedImage}
+            style={{
+              maxWidth: "95%",
+              maxHeight: "95%",
+              borderRadius: 10,
+              boxShadow: "0 10px 40px rgba(0,0,0,0.6)"
+            }}
+          />
+        </div>
+      )}
     </>
   )
 }
